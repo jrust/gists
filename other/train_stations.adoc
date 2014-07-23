@@ -84,3 +84,26 @@ RETURN REDUCE(total = 0, r IN RELATIONSHIPS(p)| r.distance + total) AS distance
 //output
 //table
 
+'''
+==== C-C with 3 hops max
+
+[source,cypher]
+----
+MATCH p =(:Station { name: 'C' })-[:CONNECTS_TO*1..3]->(:Station { name: 'C' })
+RETURN EXTRACT(n IN NODES(p) | n.name)
+----
+
+//output
+//table
+
+'''
+==== A-C with 4 hops exactly
+
+[source,cypher]
+----
+MATCH p =(:Station { name: 'A' })-[:CONNECTS_TO*4]->(:Station { name: 'C' })
+RETURN EXTRACT(n IN NODES(p) | n.name)
+----
+
+//output
+//table
