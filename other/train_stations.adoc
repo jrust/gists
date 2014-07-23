@@ -108,7 +108,7 @@ RETURN EXTRACT(n IN NODES(p) | n.name)
 //output
 //table
 
-*Not finding the ADCDC relationship. :(*
+_Not finding the ADCDC relationship. :(_
 
 '''
 ==== A-C shortest distance
@@ -148,3 +148,5 @@ RETURN EXTRACT(n IN NODES(p) | n.name)
 
 //output
 //table
+
+_Neo doesn't seem to double back on itself_
