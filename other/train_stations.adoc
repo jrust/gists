@@ -29,8 +29,8 @@ RETURN *
 
 [source,cypher]
 ----
-MATCH (:Station { name: 'A' })-[r:CONNECTS_TO]->(:Station { name: 'B' })-[r2:CONNECTS_TO]->(:Station { name: 'C' })
-RETURN r.distance + r2.distance AS distance
+MATCH p = (:Station { name: 'A' })-->(:Station { name: 'B' })-->(:Station { name: 'C' })
+RETURN REDUCE(total = 0, r IN RELATIONSHIPS(p)| r.distance + total) AS distance
 ----
 
 //output
@@ -41,8 +41,8 @@ RETURN r.distance + r2.distance AS distance
 
 [source,cypher]
 ----
-MATCH (:Station { name: 'A' })-[r:CONNECTS_TO]->(:Station { name: 'D' })
-RETURN r.distance AS distance
+MATCH p = (:Station { name: 'A' })-->(:Station { name: 'D' })
+RETURN REDUCE(total = 0, r IN RELATIONSHIPS(p)| r.distance + total) AS distance
 ----
 
 //output
@@ -53,8 +53,20 @@ RETURN r.distance AS distance
 
 [source,cypher]
 ----
-MATCH (:Station { name: 'A' })-[r:CONNECTS_TO]->(:Station { name: 'D' })-[r2:CONNECTS_TO]->(:Station { name: 'C' })
-RETURN r.distance + r2.distance AS distance
+MATCH p = (:Station { name: 'A' })-->(:Station { name: 'D' })-->(:Station { name: 'C' })
+RETURN REDUCE(total = 0, r IN RELATIONSHIPS(p)| r.distance + total) AS distance
+----
+
+//output
+//table
+
+'''
+==== A-E-B-C-D distance
+
+[source,cypher]
+----
+MATCH p = (:Station { name: 'A' })-->(:Station { name: 'E' })-->(:Station { name: 'B' })-->(:Station { name: 'C' })-->(:Station { name: 'D' })
+RETURN REDUCE(total = 0, r IN RELATIONSHIPS(p)| r.distance + total) AS distance
 ----
 
 //output
