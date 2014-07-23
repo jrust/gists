@@ -149,4 +149,4 @@ RETURN EXTRACT(n IN NODES(p) | n.name)
 //output
 //table
 
-_Neo doesn't seem to double back on itself_
+_Also not doubling back on paths that go both ways_
