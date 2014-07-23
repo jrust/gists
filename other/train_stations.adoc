@@ -1,0 +1,37 @@
+== Sample Data Set
+
+//setup
+[source,cypher]
+----
+CREATE 
+  (A:Station { name: 'A' }),
+  (B:Station { name: 'B' }),
+  (C:Station { name: 'C' }),
+  (D:Station { name: 'D' }),
+  (E:Station { name: 'E' }),
+  (A)-[:CONNECTS_TO { distance: 5 }]->(B),
+  (B)-[:CONNECTS_TO { distance: 4 }]->(C),
+  (C)-[:CONNECTS_TO { distance: 8 }]->(D),
+  (D)-[:CONNECTS_TO { distance: 8 }]->(C),
+  (D)-[:CONNECTS_TO { distance: 6 }]->(E),
+  (A)-[:CONNECTS_TO { distance: 5 }]->(D),
+  (C)-[:CONNECTS_TO { distance: 2 }]->(E),
+  (E)-[:CONNECTS_TO { distance: 3 }]->(B),
+  (A)-[:CONNECTS_TO { distance: 7 }]->(E)
+
+RETURN *
+----
+
+//graph
+
+'''
+==== A-B-C distance
+
+[source,cypher]
+----
+MATCH (:Station { name: 'A' })-[r:CONNECTS_TO]->(:Station { name: 'B' })-[r2:CONNECTS_TO]->(:Station { name: 'C' })
+RETURN r.distance + r2.distance
+----
+
+//output
+//table
