@@ -115,7 +115,7 @@ RETURN EXTRACT(n IN NODES(p) | n.name)
 
 [source,cypher]
 ----
-MATCH p =(:Station { name: 'A' })-[:CONNECTS_TO*1..]->(:Station { name: 'C' })
+MATCH p =(:Station { name: 'A' })-->(:Station { name: 'C' })
 RETURN REDUCE(total = 0, r IN RELATIONSHIPS(p)| r.distance + total) AS distance
 ORDER BY distance
 LIMIT 1
