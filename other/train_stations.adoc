@@ -107,3 +107,19 @@ RETURN EXTRACT(n IN NODES(p) | n.name)
 
 //output
 //table
+
+*Not finding the ADCDC relationship. :(*
+
+```
+==== A-C shortest distance
+
+[source,cypher]
+----
+MATCH p =(:Station { name: 'A' })-[:CONNECTS_TO*1..]->(:Station { name: 'C' })
+RETURN REDUCE(total = 0, r IN RELATIONSHIPS(p)| r.distance + total) AS distance
+ORDER BY distance
+LIMIT 1
+----
+
+//output
+//table
