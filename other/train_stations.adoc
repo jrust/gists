@@ -30,7 +30,31 @@ RETURN *
 [source,cypher]
 ----
 MATCH (:Station { name: 'A' })-[r:CONNECTS_TO]->(:Station { name: 'B' })-[r2:CONNECTS_TO]->(:Station { name: 'C' })
-RETURN r.distance + r2.distance
+RETURN r.distance + r2.distance AS distance
+----
+
+//output
+//table
+
+'''
+==== A-D distance
+
+[source,cypher]
+----
+MATCH (:Station { name: 'A' })-[r:CONNECTS_TO]->(:Station { name: 'D' })
+RETURN r.distance AS distance
+----
+
+//output
+//table
+
+'''
+==== A-D-C distance
+
+[source,cypher]
+----
+MATCH (:Station { name: 'A' })-[r:CONNECTS_TO]->(:Station { name: 'D' })-[r2:CONNECTS_TO]->(:Station { name: 'C' })
+RETURN r.distance + r2.distance AS distance
 ----
 
 //output
