@@ -110,7 +110,7 @@ RETURN EXTRACT(n IN NODES(p) | n.name)
 
 *Not finding the ADCDC relationship. :(*
 
-```
+'''
 ==== A-C shortest distance
 
 [source,cypher]
