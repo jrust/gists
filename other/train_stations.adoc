@@ -138,3 +138,13 @@ LIMIT 1
 //output
 //table
 
+==== C-C with 30 hops max
+
+[source,cypher]
+----
+MATCH p =(:Station { name: 'C' })-[:CONNECTS_TO*1..30]->(:Station { name: 'C' })
+RETURN EXTRACT(n IN NODES(p) | n.name)
+----
+
+//output
+//table
