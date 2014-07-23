@@ -71,3 +71,16 @@ RETURN REDUCE(total = 0, r IN RELATIONSHIPS(p)| r.distance + total) AS distance
 
 //output
 //table
+
+'''
+==== A-E-D distance
+
+[source,cypher]
+----
+MATCH p = (:Station { name: 'A' })-->(:Station { name: 'E' })-->(:Station { name: 'D' })
+RETURN REDUCE(total = 0, r IN RELATIONSHIPS(p)| r.distance + total) AS distance
+----
+
+//output
+//table
+
